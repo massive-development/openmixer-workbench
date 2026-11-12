@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sansation:wght@700&family=Ubuntu+Mono&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet"><style>html,body{margin:0;background:#111326;font-family:'Source Sans 3',system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#ffb347}a:hover{color:#ff5f8f}</style></helmet>
+<div style="max-width:1040px;margin:0 auto;padding:34px 21px 55px;display:flex;flex-direction:column;gap:21px;color:#fff3e2">
+<div style="display:flex;flex-direction:column;gap:8px"><h1 style="margin:0;font:700 28px/1.1 'Sansation',sans-serif">Splash loader</h1><p style="margin:0;max-width:720px;font:400 15px/1.55 'Source Sans 3',sans-serif;color:#a3a8cc;text-wrap:pretty">The waveform is drawn from the last track you played, so it is different each launch. When loading finishes, the spinning record flies into deck A and the app appears underneath, without a cut. Load an audio file to try it with your own track; it is remembered for the next restart.</p></div>
+
+<div style="position:relative;aspect-ratio:16/10;width:100%;overflow:hidden;border-radius:8px;box-shadow:0 0 0 1px #2a2f55;background:#121211">
+<div style="position:absolute;inset:0;display:grid;grid-template-rows:7% 20% 1fr;gap:2%;padding:2%;box-sizing:border-box;background:#121211;font-family:'Source Sans 3',sans-serif">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 1.5%;background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a"><span style="font:700 15px/1 'Sansation',sans-serif;color:#ece8df">OpenMixer</span><span style="font:400 13px/1 'Ubuntu Mono',monospace;color:#878176">124.0 BPM · 00:00</span></div>
+<div style="display:grid;grid-template-rows:1fr 1fr;gap:6%">
+<div style="background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a;display:flex;align-items:center;padding:0 1%;gap:2px;overflow:hidden"><sc-for list="{{ waveA }}" as="h" hint-placeholder-count="60"><div style="flex:1;min-width:1px;height:{{ h }}%;background:#e3a24f;border-radius:1px"></div></sc-for></div>
+<div style="background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a;display:flex;align-items:center;padding:0 1%;gap:2px;overflow:hidden"><sc-for list="{{ waveB }}" as="h" hint-placeholder-count="60"><div style="flex:1;min-width:1px;height:{{ h }}%;background:#86a9cb;border-radius:1px"></div></sc-for></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 22% 1fr;gap:2%;min-height:0">
+<div style="background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6%;padding:3%;min-height:0">
+<div style="display:flex;justify-content:space-between;width:100%;font:600 13px/1 'Source Sans 3',sans-serif;color:#ece8df"><span style="color:#e3a24f">A</span><span>{{ trackA }}</span></div>
+<div style="position:relative;height:62%;aspect-ratio:1;border-radius:50%;background:#141310;box-shadow:inset 0 0 0 1px #302e2a">
+<div ref="{{ slotRef }}" style="position:absolute;inset:0"></div>
+<svg viewBox="0 0 100 100" width="100%" height="100%" style="position:absolute;inset:0;display:block;opacity:{{ platterOn }}"><defs><linearGradient id="pg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#ff5f8f"></stop><stop offset="1" stop-color="#ffb347"></stop></linearGradient></defs><g ref="{{ spinRef }}"><path d="M56.25 14.55A36 36 0 1 0 85.45 43.75" fill="none" stroke="url(#pg)" stroke-width="8" stroke-linecap="round"></path><path d="M53.99 27.35A23 23 0 1 0 72.65 46.01" fill="none" stroke="url(#pg)" stroke-width="6" stroke-linecap="round"></path></g><circle cx="50" cy="50" r="8" fill="#fff3e2"></circle><path d="M81 19L64 36" stroke="#fff3e2" stroke-width="5" stroke-linecap="round"></path><rect x="58" y="34.5" width="9" height="6" rx="1.5" fill="#fff3e2" transform="rotate(-45 62.5 37.5)"></rect><circle cx="81" cy="19" r="6" fill="#fff3e2"></circle><circle cx="81" cy="19" r="2.2" fill="#1b1f3b"></circle></svg>
+</div>
+<div style="display:flex;gap:8px"><div style="width:44px;height:22px;background:#302e2a;border-radius:2px"></div><div style="width:44px;height:22px;background:#302e2a;border-radius:2px"></div></div>
+</div>
+<div style="background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a;display:flex;justify-content:center;align-items:flex-end;gap:18%;padding:8% 0"><div style="width:6px;height:70%;background:#302e2a;border-radius:3px;position:relative"><div style="position:absolute;left:-9px;top:30%;width:24px;height:14px;background:#ece8df;border-radius:2px"></div></div><div style="width:6px;height:70%;background:#302e2a;border-radius:3px;position:relative"><div style="position:absolute;left:-9px;top:45%;width:24px;height:14px;background:#ece8df;border-radius:2px"></div></div></div>
+<div style="background:#1a1a18;box-shadow:inset 0 0 0 1px #302e2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6%;padding:3%;min-height:0">
+<div style="display:flex;justify-content:space-between;width:100%;font:600 13px/1 'Source Sans 3',sans-serif;color:#878176"><span style="color:#86a9cb">B</span><span>Empty</span></div>
+<div style="height:62%;aspect-ratio:1;border-radius:50%;background:#141310;box-shadow:inset 0 0 0 1px #302e2a"></div>
+<div style="display:flex;gap:8px"><div style="width:44px;height:22px;background:#302e2a;border-radius:2px"></div><div style="width:44px;height:22px;background:#302e2a;border-radius:2px"></div></div>
+</div>
+</div>
+</div>
+<div style="position:absolute;inset:0;visibility:{{ splashVis }}">
+<x-import component-from-global-scope="om-splash" from="./om-splash.js" style="display:block;width:100%;height:100%" hint-size="100%,100%"></x-import>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:13px;align-items:center">
+<span style="font:600 13px/1 'Source Sans 3',sans-serif;color:#a3a8cc">Simulate</span>
+<sc-for list="{{ scenarios }}" as="s" hint-placeholder-count="3"><button onClick="{{ s.run }}" style="padding:9px 14px;border:0;border-radius:4px;background:#2a2f55;color:#fff3e2;font:600 14px/1 'Source Sans 3',sans-serif;cursor:pointer" style-hover="background:#363c66">{{ s.label }}</button></sc-for>
+<span style="width:1px;height:24px;background:#2a2f55"></span>
+<label style="display:flex;align-items:center;gap:8px;font:600 13px/1 'Source Sans 3',sans-serif;color:#a3a8cc;cursor:pointer"><input type="checkbox" checked="{{ handoff }}" onChange="{{ onHandoff }}" style="accent-color:#ff5f8f"></input>Hand off to deck A</label>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:13px;align-items:center">
+<span style="font:600 13px/1 'Source Sans 3',sans-serif;color:#a3a8cc">Last track</span>
+<label style="padding:9px 14px;border-radius:4px;background:#ff5f8f;color:#1b1f3b;font:600 14px/1 'Source Sans 3',sans-serif;cursor:pointer">Load audio file…<input type="file" accept="audio/*" onChange="{{ onFile }}" style="display:none"></input></label>
+<sc-for list="{{ presets }}" as="p" hint-placeholder-count="2"><button onClick="{{ p.run }}" style="padding:9px 14px;border:0;border-radius:4px;background:#2a2f55;color:#fff3e2;font:600 14px/1 'Source Sans 3',sans-serif;cursor:pointer" style-hover="background:#363c66">{{ p.label }}</button></sc-for>
+<span style="font:400 13px/1.4 'Ubuntu Mono',monospace;color:#fff3e2">{{ trackLabel }}</span>
+</div>
+<div style="font:400 13px/1.5 'Ubuntu Mono',monospace;color:#a3a8cc;min-height:20px">{{ log }}</div>
+
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:13px">
+<h2 style="margin:0;font:700 18px/1.2 'Sansation',sans-serif">Usage</h2>
+<pre style="margin:0;padding:16px 18px;background:#0b0c1a;border-radius:6px;font:400 13px/1.6 'Ubuntu Mono',monospace;color:#fff3e2;overflow:auto;white-space:pre">&lt;om-splash id="splash" style="position:fixed;inset:0"&gt;&lt;/om-splash&gt;
+
+const s = document.getElementById('splash');
+s.waveform = settings.lastTrackPeaks;     // cached on last load; omit on first launch
+s.status = 'Starting audio engine';
+await audio.init();      s.progress = 0.3;
+s.status = 'Loading library';
+await library.scan(p =&gt; s.progress = 0.3 + p * 0.7);
+s.complete({ handoffTo: deckA.platterEl }); // record flies into deck A
+s.addEventListener('om-splash-done', e =&gt; {
+  deckA.platter.startAt(e.detail.angle);  // keep spinning from the same angle
+  s.remove();
+});
+
+// when a track loads in the app, cache its peaks for next launch
+settings.lastTrackPeaks = OMSplash.peaks(audioBuffer);</pre>
+<p style="margin:0;font:400 14px/1.55 'Source Sans 3',sans-serif;color:#a3a8cc;text-wrap:pretty">Peaks are a small array (400 numbers), so cache them with the session rather than decoding audio at launch. Setting <span style="font-family:'Ubuntu Mono',monospace;color:#fff3e2">waveform</span> mid-load morphs the bars. Without <span style="font-family:'Ubuntu Mono',monospace;color:#fff3e2">handoffTo</span>, <span style="font-family:'Ubuntu Mono',monospace;color:#fff3e2">complete()</span> brakes the record to the icon position and fades as before.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KEY = 'om-splash-demo-last-track';
+const synth = (kind, n = 400) => Array.from({ length: n }, (_, i) => {
+  const x = i / n;
+  if (kind === 'house') {
+    const breakdown = x > 0.55 && x < 0.7 ? 0.35 : 1;
+    const intro = Math.min(1, x / 0.12);
+    return (0.35 + 0.55 * (i % 8 < 2 ? 1 : 0.55) * (0.8 + 0.2 * Math.sin(i * 0.9))) * breakdown * (0.3 + 0.7 * intro);
+  }
+  return 0.2 + 0.7 * Math.pow(Math.sin(x * Math.PI * 2.2) ** 2, 0.7) * (0.85 + 0.15 * Math.sin(i * 0.31));
+});
+
+class Component extends DCLogic {
+  state = { log: 'Intro playing…', handoff: true, trackName: null, peaks: null, platterOn: 0, splashVis: 'visible' };
+  timers = [];
+  slotRef = React.createRef();
+  spinRef = React.createRef();
+  el() { return document.querySelector('om-splash'); }
+  clear() { this.timers.forEach(clearTimeout); this.timers = []; }
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && s.peaks) this.setState({ trackName: s.name, peaks: s.peaks }); } catch (e) {}
+    const hook = () => {
+      const e = this.el();
+      if (!e || !e.restart) return setTimeout(hook, 100);
+      if (!e.__omHooked) {
+        e.__omHooked = true;
+        e.addEventListener('om-splash-intro', () => this.setState({ log: 'om-splash-intro: waveform now follows progress' }));
+        e.addEventListener('om-splash-ready', () => this.setState({ log: 'om-splash-ready' }));
+        e.addEventListener('om-splash-done', ev => this.onDone(ev.detail || {}));
+      }
+      this.run('typical');
+    };
+    hook();
+  }
+  componentWillUnmount() { this.clear(); cancelAnimationFrame(this.spinRaf); }
+  onDone({ angle = 0 }) {
+    if (this.state.handoff) {
+      this.setState({ platterOn: 1, splashVis: 'hidden', log: `om-splash-done: deck A takes over at ${Math.round(angle)}°` });
+      let a = angle, prev = performance.now();
+      const spin = ts => { a += 200 * (ts - prev) / 1000; prev = ts; if (this.spinRef.current) this.spinRef.current.setAttribute('transform', `rotate(${a % 360} 50 50)`); this.spinRaf = requestAnimationFrame(spin); };
+      cancelAnimationFrame(this.spinRaf); this.spinRaf = requestAnimationFrame(spin);
+    } else this.setState({ log: 'om-splash-done: hand off to the app' });
+  }
+  reset() {
+    const e = this.el(); if (!e) return null;
+    this.clear(); cancelAnimationFrame(this.spinRaf);
+    this.setState({ platterOn: 0, splashVis: 'visible', log: 'Intro playing…' });
+    e.waveform = this.state.peaks; e.restart();
+    return e;
+  }
+  run(kind) {
+    const e = this.reset(); if (!e) return;
+    const S = {
+      typical: [[0.4, 'Starting audio engine', .1], [1.2, null, .22], [2.2, 'Loading library', .4], [3.0, null, .55], [3.8, 'Scanning crates', .72], [4.6, null, .9], [5.2, 'done']],
+      stalls: [[0.4, 'Starting audio engine', .15], [1.0, null, .3], [5.5, 'Loading library', .65], [6.5, null, .78], [9.5, 'Analysing tracks', .95], [10.2, 'done']],
+      fast: [[0.2, 'Loading library', .6], [0.5, 'done']]
+    }[kind];
+    S.forEach(([at, status, p]) => this.timers.push(setTimeout(() => {
+      if (status === 'done') return e.complete(this.state.handoff ? { handoffTo: this.slotRef.current } : {});
+      if (status) e.status = status;
+      e.progress = p;
+    }, at * 1000)));
+  }
+  setTrack(name, peaks) {
+    this.setState({ trackName: name, peaks });
+    try { localStorage.setItem(KEY, JSON.stringify({ name, peaks })); } catch (e) {}
+    const e = this.el(); if (e) e.waveform = peaks;
+  }
+  async loadFile(file) {
+    if (!file) return;
+    this.setState({ log: `Decoding ${file.name}…` });
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const buf = await ctx.decodeAudioData(await file.arrayBuffer());
+      const peaks = window.OMSplash.peaks(buf);
+      ctx.close && ctx.close();
+      this.setTrack(file.name.replace(/\.[^.]+$/, ''), peaks);
+      this.setState({ log: `Peaks cached for ${file.name}. Restarting.` });
+      this.run('typical');
+    } catch (err) { this.setState({ log: `Could not decode that file: ${err.message || err}` }); }
+  }
+  bars(src, n, scale) {
+    if (!src) return Array.from({ length: n }, (_, i) => Math.round(20 + 50 * Math.abs(Math.sin(i * 0.37) * Math.sin(i * 0.11 + 1.3)) + 20 * Math.abs(Math.sin(i * 1.7))));
+    return Array.from({ length: n }, (_, i) => Math.round(12 + scale * (src[Math.floor(i * src.length / n)] || 0)));
+  }
+  renderVals() {
+    const { peaks, trackName, handoff } = this.state;
+    return {
+      log: this.state.log, handoff, platterOn: this.state.platterOn, splashVis: this.state.splashVis,
+      slotRef: this.slotRef, spinRef: this.spinRef,
+      trackA: trackName || 'Last session',
+      trackLabel: trackName ? `Waveform: ${trackName}` : 'Waveform: generated (first launch)',
+      waveA: this.bars(peaks, 120, 80), waveB: Array.from({ length: 120 }, () => 4),
+      scenarios: [
+        { label: 'Typical load', run: () => this.run('typical') },
+        { label: 'With stalls', run: () => this.run('stalls') },
+        { label: 'Instant', run: () => this.run('fast') }
+      ],
+      presets: [
+        { label: 'House track', run: () => { this.setTrack('Warehouse Hours', synth('house')); this.run('typical'); } },
+        { label: 'Ambient track', run: () => { this.setTrack('Low Tide', synth('ambient')); this.run('typical'); } },
+        { label: 'Forget', run: () => { try { localStorage.removeItem(KEY); } catch (e) {} this.setState({ trackName: null, peaks: null }, () => this.run('typical')); } }
+      ],
+      onHandoff: ev => this.setState({ handoff: ev.target.checked }),
+      onFile: ev => this.loadFile(ev.target.files && ev.target.files[0])
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T23:40:00Z",
+  "title": "Design System: OpenMixer",
+  "extensions": {
+    "colorMeta": {
+      "deck-a-amber": { "role": "primary", "displayName": "Amber, Deck A", "canonical": "#e3a24f", "tonalRamp": ["#3b2a10","#5e4018","#8f530b","#b9792a","#e3a24f","#ecbb7a","#f4d6a8","#fbeed8"] },
+      "deck-b-slate": { "role": "secondary", "displayName": "Slate, Deck B", "canonical": "#86a9cb", "tonalRamp": ["#13222f","#1e3a54","#2b5a86","#4d7fae","#86a9cb","#a9c3dc","#cddbea","#e9eff6"] },
+      "signal-red": { "role": "tertiary", "displayName": "Signal Red", "canonical": "#ef5a3f", "tonalRamp": ["#3a120b","#6b2113","#a1301d","#c4301d","#ef5a3f","#f58a76","#f9b5a8","#fde1db"] },
+      "bg": { "role": "neutral", "displayName": "Matte Ground", "canonical": "#121211", "tonalRamp": ["#0a0a09","#121211","#181816","#22211e","#2b2a26","#302e2a","#9d978b","#ece8df"] }
+    },
+    "typographyMeta": {
+      "numeral": { "displayName": "Numeral", "purpose": "Every number, in Ubuntu Mono, so values do not jitter." },
+      "label": { "displayName": "Label", "purpose": "Control labels at 11px." }
+    },
+    "shadows": [
+      { "name": "inset-line", "value": "inset 0 0 0 1px #302e2a", "purpose": "Etched 1px edge on every part." },
+      { "name": "top-highlight", "value": "inset 0 1px 0 rgba(255,255,255,.04)", "purpose": "Faint top edge on raised faces." },
+      { "name": "raised-drop", "value": "0 2px 3px rgba(0,0,0,.5)", "purpose": "The only cast shadow, on raised controls." }
+    ],
+    "motion": [],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Control",
+      "kind": "custom",
+      "refersTo": "control",
+      "description": "Standard button or toggle, Roomy density.",
+      "html": "<button class=\"ds-control\">SYNC</button>",
+      "css": ".ds-control{height:26px;padding:0 13px;background:#22211e;color:#ece8df;border:0;border-radius:2px;font:500 11px/1.2 'Source Sans 3',system-ui,sans-serif;letter-spacing:.04em;box-shadow:inset 0 0 0 1px #302e2a,0 2px 3px rgba(0,0,0,.5)}.ds-control:hover{background:#2b2a26}.ds-control:focus-visible{outline:1px solid #ece8df;outline-offset:2px}"
+    },
+    {
+      "name": "Numeral readout",
+      "kind": "custom",
+      "refersTo": "numeral-large",
+      "description": "Primary value such as BPM, in mono.",
+      "html": "<span class=\"ds-readout\">128.00</span>",
+      "css": ".ds-readout{font:500 21px/1 'Ubuntu Mono',ui-monospace,monospace;color:#ece8df;background:#0a0a09;padding:5px 8px;border-radius:2px;box-shadow:inset 0 0 0 1px #302e2a}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Machined Faceplate",
+    "overview": "One faceplate, not nested cards. Three columns run top to bottom: deck A, the mixer, deck B, and deck B mirrors A. Parts are near-square, surfaces are matte warm neutrals, and structure comes from etched 1px lines rather than shadow or light.",
+    "keyCharacteristics": ["Matte, warm, near-black ground with muted deck colours.", "Depth from 1px inset lines and tonal steps; no glow, no blur.", "Fibonacci spacing steps; Compact is Roomy shifted down one step.", "Light mode darkens every colour to hold contrast in daylight."],
+    "rules": [
+      { "name": "The Signal Rule", "body": "Red marks the playhead and recording, nothing else.", "section": "colors" },
+      { "name": "The Low-Band Rule", "body": "In waveforms, low frequencies take the deck colour and highs sit in neutral on top.", "section": "colors" },
+      { "name": "The Mono Numbers Rule", "body": "Every number is Ubuntu Mono so values do not shift width as they change.", "section": "typography" },
+      { "name": "The Lines Not Light Rule", "body": "Structure is drawn with 1px lines and tonal steps. No halos, no blur, no bloom.", "section": "elevation" }
+    ],
+    "dos": ["Do pair every deck hue with its letter (A–D).", "Do build structure with 1px etched lines and tonal steps.", "Do set every number in Ubuntu Mono.", "Do reserve signal red (#ef5a3f) for the playhead and record."],
+    "donts": ["Don't add glow, blur or bloom to show an active state.", "Don't use Sansation below 21px.", "Don't go below 11px for a label or 12px for running prose."]
+  }
+}
