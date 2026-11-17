@@ -1,0 +1,141 @@
+/* Tokens copied from resources/themes/openmixer-dark.json (Machined Faceplate, dark). */
+@font-face { font-family: Sansation; font-weight: 700; src: url(fonts/Sansation-Bold.ttf); }
+@font-face { font-family: "Source Sans 3"; font-weight: 400; src: url(fonts/SourceSans3-Regular.ttf); }
+@font-face { font-family: "Source Sans 3"; font-weight: 500; src: url(fonts/SourceSans3-Medium.ttf); }
+@font-face { font-family: "Ubuntu Mono"; font-weight: 400; src: url(fonts/UbuntuMono-Regular.ttf); }
+@font-face { font-family: "Ubuntu Mono"; font-weight: 700; src: url(fonts/UbuntuMono-Bold.ttf); }
+
+:root {
+  --ground: #121211; --surface: #181816; --raised: #22211e; --hover: #2b2a26; --well: #0a0a09;
+  --border: #302e2a; --border-strong: #75716a; --text: #ece8df; --text-2: #bab4a7; --text-3: #9d978b;
+  --signal: #ef5a3f; --deck-a: #e3a24f; --deck-b: #86a9cb;
+  --gap: 13px; --inner: 8px; --r-card: 3px; --r-ctl: 2px;
+  --t-display: 34px; --t-headline: 21px; --t-body: 13px; --t-label: 11px;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--ground); color: var(--text); font: 400 var(--t-body)/1.3 "Source Sans 3", system-ui, sans-serif;
+  display: grid; grid-template-rows: 44px 104px minmax(180px, 1fr) 372px; overflow: hidden;
+  user-select: none; -webkit-user-select: none; cursor: default;
+}
+.num { font-family: "Ubuntu Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.label { font-size: var(--t-label); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* Top bar */
+#top { display: flex; align-items: center; gap: var(--gap); padding: 0 var(--gap); border-bottom: 1px solid var(--border); background: var(--surface); }
+.brand { font: 700 var(--t-headline)/1 Sansation, sans-serif; letter-spacing: .14em; }
+.tabs { display: flex; gap: 4px; margin-left: var(--gap); }
+.chip { height: 26px; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--r-ctl); background: var(--raised);
+  font-size: var(--t-label); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-2);
+  display: inline-flex; align-items: center; gap: 6px; }
+.chip:hover { background: var(--hover); }
+.chip.on { color: var(--text); border-color: var(--border-strong); background: var(--hover); }
+.spacer { flex: 1; }
+.lamp { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); opacity: .55; }
+#hud { color: var(--text-3); font-size: 12px; }
+#clock { font-size: 15px; color: var(--text-2); }
+
+/* Deck headers */
+#heads { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
+.head { background: var(--surface); padding: 10px var(--gap) 8px; display: grid; grid-template-rows: 42px 40px; gap: 4px; min-width: 0; }
+.head .row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto auto auto; gap: var(--gap); align-items: center; }
+.letter { width: 34px; height: 34px; border-radius: var(--r-ctl); display: grid; place-items: center;
+  font: 700 var(--t-headline)/1 Sansation, sans-serif; color: var(--ground); background: var(--hue); }
+.title { font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.artist { color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat { text-align: right; }
+.stat b { display: block; font: 700 var(--t-headline)/1.05 "Ubuntu Mono", monospace; font-variant-numeric: tabular-nums; }
+.stat.time b { min-width: 6.5ch; }
+.overview { position: relative; background: var(--well); border: 1px solid var(--border); border-radius: var(--r-ctl); overflow: hidden; cursor: pointer; }
+.overview canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.overview .played { position: absolute; inset: 0; background: var(--well); opacity: .6; transform-origin: left; transform: scaleX(0); will-change: transform; }
+.overview .ph { position: absolute; left: -1px; top: 0; width: 2px; height: 100%; background: var(--signal); will-change: transform; }
+.overview .cue { position: absolute; top: 0; width: 1px; height: 100%; background: var(--text); opacity: .45; }
+
+/* Waveforms */
+#waves { position: relative; background: var(--well); min-height: 0; }
+#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.lane { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; cursor: ew-resize; }
+.lane[data-deck="0"] { top: 0; border-bottom: 1px solid var(--border); }
+.lane[data-deck="1"] { top: 50%; }
+.lane .tag { position: absolute; left: 8px; top: 6px; font: 700 13px/1 Sansation, sans-serif; color: var(--hue); letter-spacing: .1em; }
+.lane .bar { position: absolute; left: 0; top: 4px; padding-left: 4px; font: 400 11px/1 "Ubuntu Mono", monospace; color: var(--text-3); will-change: transform; }
+.lane .flag { position: absolute; left: 0; bottom: 0; top: 0; width: 1px; background: var(--text); opacity: .7; will-change: transform; }
+.lane .flag b { position: absolute; left: 0; bottom: 4px; min-width: 15px; height: 15px; padding: 0 3px; display: grid; place-items: center;
+  background: var(--text); color: var(--ground); font: 700 11px/1 "Ubuntu Mono", monospace; border-radius: 0 var(--r-ctl) var(--r-ctl) 0; }
+
+/* Controls */
+#controls { display: grid; grid-template-columns: minmax(0, 1fr) 492px minmax(0, 1fr); gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+.panel { background: var(--surface); padding: var(--gap); min-width: 0; }
+.deckpanel { display: grid; grid-template-columns: minmax(0, 1fr) 84px; gap: var(--gap); }
+.deckpanel[data-deck="1"] { grid-template-columns: 84px minmax(0, 1fr); }
+.deckpanel[data-deck="1"] .tempo { order: -1; }
+.deckmain { display: grid; grid-template-rows: auto 1fr auto auto; gap: var(--gap); min-width: 0; }
+.readouts { display: flex; align-items: flex-end; gap: 22px; padding-bottom: var(--inner); border-bottom: 1px solid var(--border); }
+.readouts .bpm { font: 700 var(--t-display)/1 "Ubuntu Mono", monospace; font-variant-numeric: tabular-nums; }
+.readouts .sub b { display: block; font: 400 15px/1.2 "Ubuntu Mono", monospace; color: var(--text-2); }
+.pads { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: var(--inner); }
+.pad { border: 1px solid var(--border); border-radius: var(--r-ctl); background: var(--raised); display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: space-between; padding: 6px 8px; min-height: 44px; }
+.pad:hover { background: var(--hover); }
+.pad:active { background: var(--border); }
+.pad .n { font: 700 13px/1 "Ubuntu Mono", monospace; color: var(--text-3); }
+.pad.set { border-color: color-mix(in srgb, var(--hue) 70%, transparent); background: color-mix(in srgb, var(--hue) 22%, var(--raised)); }
+.pad.set .n { color: var(--hue); }
+.pad .t { font: 400 12px/1 "Ubuntu Mono", monospace; color: var(--text-2); }
+.loops { display: grid; grid-template-columns: auto repeat(6, 1fr); gap: 4px; align-items: center; }
+.loops .label { padding-right: 8px; }
+.btn { height: 32px; border: 1px solid var(--border); border-radius: var(--r-ctl); background: var(--raised); color: var(--text-2);
+  font-size: var(--t-label); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.btn.num { font: 400 13px/1 "Ubuntu Mono", monospace; letter-spacing: 0; }
+.btn:hover { background: var(--hover); }
+.btn:active { background: var(--border); }
+.btn.on { color: var(--text); border-color: var(--border-strong); background: var(--hover); }
+.transport { display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: var(--inner); }
+.transport .btn { height: 44px; font-size: 13px; }
+.btn.play.on { border-color: color-mix(in srgb, var(--hue) 70%, transparent); background: color-mix(in srgb, var(--hue) 22%, var(--raised)); color: var(--hue); }
+.btn.sync.on { border-color: var(--text); }
+
+/* Faders */
+.tempo { display: grid; grid-template-rows: auto 1fr auto; gap: var(--inner); justify-items: center; }
+.fader { position: relative; width: 58px; min-height: 0; height: 100%; cursor: ns-resize; touch-action: none; }
+.fader::before { content: ""; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 2px; margin-left: -1px; background: var(--well); border: 1px solid var(--border); border-width: 0 1px; }
+.fader::after { content: ""; position: absolute; left: 8px; right: 8px; top: 6px; bottom: 6px; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, var(--border) 0 1px, transparent 1px 12.5%); background-size: 100% calc(100% - 1px);
+  -webkit-mask: linear-gradient(to right, #000 0 10px, transparent 10px calc(100% - 10px), #000 calc(100% - 10px)); mask: linear-gradient(to right, #000 0 10px, transparent 10px calc(100% - 10px), #000 calc(100% - 10px)); }
+.fader .thumb { position: absolute; left: 9px; right: 9px; top: 0; height: 26px; margin-top: -13px; z-index: 1; border-radius: var(--r-ctl);
+  background: var(--raised); border: 1px solid var(--border-strong); box-shadow: 0 2px 3px rgba(0,0,0,.5); will-change: transform; }
+.fader .thumb::after { content: ""; position: absolute; left: 3px; right: 3px; top: 50%; height: 2px; margin-top: -1px; background: var(--text); }
+.fader.h { width: 100%; height: 46px; cursor: ew-resize; }
+.fader.h::before { left: 6px; right: 6px; top: 50%; bottom: auto; width: auto; height: 2px; margin: -1px 0 0; border-width: 1px 0; }
+.fader.h::after { display: none; }
+.fader.h .thumb { left: 0; right: auto; top: 8px; width: 26px; height: 30px; margin: 0 0 0 -13px; }
+.fader.h .thumb::after { left: 50%; right: auto; top: 3px; bottom: 3px; width: 2px; height: auto; margin: 0 0 0 -1px; }
+
+/* Mixer */
+.mixer { display: grid; grid-template-rows: 1fr 46px; gap: var(--inner); }
+.strips { display: grid; grid-template-columns: 1fr 76px 1fr; gap: var(--gap); min-height: 0; }
+.strip { display: grid; grid-template-columns: 64px 58px 30px; grid-template-rows: 22px 1fr; column-gap: var(--inner); justify-content: center; min-height: 0; }
+.strip.b { grid-template-columns: 30px 58px 64px; }
+.strip.b .knobs { order: 3; } .strip.b .meters { order: -1; }
+.strip h3 { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; font: 500 var(--t-label)/1 "Source Sans 3"; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); order: -2; }
+.strip h3 i { width: 8px; height: 8px; border-radius: 50%; background: var(--hue); }
+.knobs { display: grid; grid-template-rows: repeat(5, 1fr); min-height: 0; }
+.knobcell { display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 6px; }
+.knob { width: 36px; height: 36px; border-radius: 50%; background: var(--raised); border: 1px solid var(--border-strong); position: relative; cursor: ns-resize; touch-action: none;
+  box-shadow: 0 2px 3px rgba(0,0,0,.5); }
+.knob i { position: absolute; inset: 0; transform: rotate(var(--a, 0deg)); will-change: transform; }
+.knob i::after { content: ""; position: absolute; left: 50%; top: 3px; width: 2px; height: 11px; margin-left: -1px; background: var(--text); border-radius: 1px; }
+.knobcell .label { font-size: 10px; }
+.meters { display: grid; grid-template-columns: 12px 12px; gap: 3px; justify-content: center; padding: 6px 0; }
+.meter { position: relative; border-radius: 1px; overflow: hidden;
+  background: linear-gradient(to top, var(--text-3) 0 62%, var(--text-2) 62% 88%, var(--signal) 88%); }
+.meter::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to top, transparent 0 4px, var(--surface) 4px 5px); }
+.meter i { position: absolute; inset: 0; background: var(--well); transform-origin: top; will-change: transform; }
+.master { display: grid; grid-template-rows: 22px 1fr auto; justify-items: center; min-height: 0; }
+.master h3 { font: 500 var(--t-label)/22px "Source Sans 3"; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.master .meters { height: 100%; }
+.xf { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--gap); }
+.xf span { font: 700 13px/1 Sansation, sans-serif; }
