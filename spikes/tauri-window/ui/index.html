@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>OpenMixer spike</title>
+<link rel="stylesheet" href="style.css">
+<body>
+<header id="top">
+  <div class="brand">OPENMIXER</div>
+  <nav class="tabs">
+    <button class="chip on">Decks</button><button class="chip">Library</button>
+    <button class="chip">FX</button><button class="chip">Sampler</button>
+  </nav>
+  <div class="spacer"></div>
+  <div id="hud" class="num"></div>
+  <button class="chip rec"><i class="lamp"></i>REC</button>
+  <div id="clock" class="num">00:00:00</div>
+</header>
+
+<section id="heads"></section>
+
+<section id="waves">
+  <canvas id="gl"></canvas>
+  <div class="lane" data-deck="0"></div>
+  <div class="lane" data-deck="1"></div>
+</section>
+
+<section id="controls">
+  <div class="panel deckpanel" data-deck="0"></div>
+  <div class="panel mixer" id="mixer"></div>
+  <div class="panel deckpanel" data-deck="1"></div>
+</section>
+<script src="app.js"></script>
+</body>
+</html>
