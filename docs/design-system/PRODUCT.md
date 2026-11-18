@@ -14,7 +14,7 @@ Working DJs: people who play regular sets and already use djay, Serato, Rekordbo
 
 ## Product Purpose
 
-OpenMixer is a free, open-source DJ application (Linux first; Windows and macOS to follow), a native desktop app written in Rust with GPUI. It aims for djay-Pro-class capability (multi-deck mixing, effects, sync, BPM/key analysis, stem separation, Automix, controller support) with an interface that reads at a glance. The website exists to get a working DJ to download it and try a session. This directory holds the design-system artifacts (app, website, icon, splash) that define how it looks.
+OpenMixer DJ is a free, open-source DJ application (Linux first; Windows and macOS to follow), a native desktop app written in Rust with GPUI. It aims for djay-Pro-class capability (multi-deck mixing, effects, sync, BPM/key analysis, stem separation, Automix, controller support) with an interface that reads at a glance. The website exists to get a working DJ to download it and try a session. This directory holds the design-system artifacts (app, website, icon, splash) that define how it looks.
 
 ## Positioning
 
@@ -33,7 +33,7 @@ The app is used in dark rooms, mid-set, where waveforms, numerals and lit state 
 
 ## Brand Commitments
 
-Name: OpenMixer. Brand idea from `../design/E1-brand.md`: a lit console in a dark room. Ember is the reserved signature colour for brand marks and "now" cues, never a deck accent. The default look is OpenMixer's own, not a familiar-feeling scheme. These carry over from the app's brand record; any visual decisions beyond them are left to design work.
+Name: OpenMixer DJ (the "DJ" separates it from the unrelated openmixer.org and Stanford CCRMA projects). Brand idea from `../design/E1-brand.md`: a lit console in a dark room. Ember is the reserved signature colour for brand marks and "now" cues, never a deck accent. The default look is OpenMixer's own, not a familiar-feeling scheme. These carry over from the app's brand record; any visual decisions beyond them are left to design work.
 
 ## Evidence on Hand
 

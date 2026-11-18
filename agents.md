@@ -1,8 +1,8 @@
-# OpenMixer - Agent Instructions
+# OpenMixer DJ - Agent Instructions
 
 ## Overview
 
-OpenMixer is a clean-room, legally original implementation of professional DJ software, written in Rust with GPUI for the UI. This document provides instructions for any AI agent to understand the codebase and continue development.
+OpenMixer DJ is a clean-room, legally original implementation of professional DJ software, written in Rust with GPUI for the UI. This document provides instructions for any AI agent to understand the codebase and continue development.
 
 **Status:** see "Current State" below.
 

@@ -1,6 +1,6 @@
 # openmixer-workbench
 
-Planning, research and tooling for [OpenMixer](https://github.com/massive-development/openmixer).
+Planning, research and tooling for [OpenMixer DJ](https://github.com/massive-development/openmixer).
 Nothing here is needed to build or run the app.
 
 - `docs/superpowers/` specs and implementation plans
