@@ -1,4 +1,4 @@
-# E1: OpenMixer brand and visual tokens
+# E1: OpenMixer DJ brand and visual tokens
 
 > **Superseded on look by [ADR 0008](../adr/0008-machined-faceplate-supersedes-e1.md) (2026-11-08).** The Machined Faceplate design system replaces E1's ember brand colour, "active means glow" rule, cool deck accents, violet-cast ground, glass cards and Inter type. This record is kept as history; since the redesign's Phases 1 to 5 the app no longer uses these tokens (old E1 theme files still load, with warnings for the retired keys). Phase 0 answers: [`faceplate-decisions.md`](faceplate-decisions.md).
 
